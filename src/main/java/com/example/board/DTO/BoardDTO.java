@@ -1,8 +1,5 @@
 package com.example.board.DTO;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
@@ -17,6 +14,5 @@ public class BoardDTO {
 	private String contents;
 	
 	private String datetime;
-	
 	
 }

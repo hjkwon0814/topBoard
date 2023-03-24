@@ -10,4 +10,6 @@ import com.example.board.DTO.BoardDTO;
 @Mapper
 public interface MapperInterface {
 	List<BoardDTO> getBoardDto();
+	
+	int setBoardDto(BoardDTO boardDto);
 }

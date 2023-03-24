@@ -9,14 +9,14 @@
 <body>
 	<form action="/boardWrite" method="post">
 		<div>
-			<span>제목 : </span><input type="text"><br />
+			<span>제목 : </span><input name="title" type="text"><br />
 		</div>
 		<div>
 			<span>내용 : </span>
-			<textarea cols="50" rows="10"></textarea>
+			<textarea  name="contents" cols="50" rows="10"></textarea>
 		</div>
 		<div>
-			<span>작성자 : </span><input type="text">
+			<span>작성자 : </span><input name ="writer" type="text">
 		</div>
 		<div style="text-align: center; margin-top: 3px;">
 			<button type="submit">등록하기</button>

@@ -5,7 +5,11 @@
 <mapper namespace="com.example.board.mapper.MapperInterface">
 
 	<select id="getBoardDto" resultType="BoardDTO">
-		SELECT * FROM Board
+		SELECT id, title, contents, writer, dateTime FROM Board
 	</select>
+	
+	<insert id="setBoardDto">
+		INSERT INTO board (title, contents, writer, dateTime) values (#{title}, #{contents}, #{writer}, #{dateTime})
+	</insert>
 
 </mapper>
