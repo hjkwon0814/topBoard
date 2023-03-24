@@ -1,0 +1,22 @@
+package com.example.board.DTO;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+
+import lombok.Data;
+
+@Data
+public class BoardDTO {
+	
+	private int id;
+	
+	private String writer;
+	
+	private String title;
+	
+	private String contents;
+	
+	private String datetime;
+	
+	
+}
