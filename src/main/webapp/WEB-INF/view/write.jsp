@@ -36,7 +36,6 @@
 		
 		function sendData() {
 			alert("글 작성 되었습니다.");
-			console.log("들어오긴함?");
 			document.getElementById("writeBoard").submit();
 		}
 		
