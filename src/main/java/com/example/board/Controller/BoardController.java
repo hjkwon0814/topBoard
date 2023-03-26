@@ -27,11 +27,7 @@ public class BoardController {
 	public String home(Model model) {
 		List<BoardDTO> boards = boardService.getBoardDto();
 				
-		model.addAttribute("board", boards);
-		
-		System.out.println(boards.get(0).getDateTime());
-		System.out.println(boards.get(0).getTitle());
-		
+		model.addAttribute("board", boards);		
 		
 		return "board";
 	}
@@ -40,12 +36,10 @@ public class BoardController {
 	public String boardWrite(Model model, BoardDTO boardDTO) {
 		
 		boardDTO.setDateTime(LocalDateTime.now().toString());
-		System.out.println(LocalDateTime.now().toString());
-		System.out.println(boardDTO.getDateTime());
 		
 		boardService.insertBoard(boardDTO);
 		
-		return "board";		
+		return "board";
 	}
 	
 	@GetMapping("/boardWritePopup")

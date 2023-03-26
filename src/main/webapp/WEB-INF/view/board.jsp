@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -16,7 +17,7 @@
 		<button>조회</button>
 		<button>선택삭제</button>
 	</div>
-	<div>
+	<div id="board">
 		<table border="1" style="">
 			<tr>
 				<td><input id="checkAll" type="checkbox"></td>
@@ -48,12 +49,19 @@
 	</div>
 
 	<script>
-	
-	const openURL = '/boardWritePopup'
+		const openURL = '/boardWritePopup'
 		function showPopup() {
 			var windowOpen = window.open(openURL, "팝업 테스트",
 					"width=400, height=300, top=10, left=10");
 		}
+		
+		function reloadDiv() {
+			 $('#divReloadLayer').load(location.href+' #divReloadLayer');
+		}
+
+		/* $(function() {
+			$("#board").load(window.location.href + "board.jsp");
+		}) */
 	</script>
 </body>
 </html>
