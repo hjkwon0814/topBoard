@@ -2,6 +2,7 @@ package com.example.board.DTO;
 
 import lombok.Data;
 
+
 @Data
 public class BoardDTO {
 	
@@ -13,6 +14,6 @@ public class BoardDTO {
 	
 	private String contents;
 	
-	private String datetime;
+	private String dateTime;
 	
 }

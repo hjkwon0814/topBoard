@@ -29,7 +29,7 @@ public class BoardController {
 				
 		model.addAttribute("board", boards);
 		
-		System.out.println(boards.get(0).getDatetime());
+		System.out.println(boards.get(0).getDateTime());
 		System.out.println(boards.get(0).getTitle());
 		
 		
@@ -39,10 +39,9 @@ public class BoardController {
 	@PostMapping("/boardWrite")
 	public String boardWrite(Model model, BoardDTO boardDTO) {
 		
-		boardDTO.setDatetime(LocalDateTime.now().toString());
-		System.out.println(boardDTO.getContents());
-		System.out.println(boardDTO.getTitle());
-		System.out.println(boardDTO.getDatetime());
+		boardDTO.setDateTime(LocalDateTime.now().toString());
+		System.out.println(LocalDateTime.now().toString());
+		System.out.println(boardDTO.getDateTime());
 		
 		boardService.insertBoard(boardDTO);
 		

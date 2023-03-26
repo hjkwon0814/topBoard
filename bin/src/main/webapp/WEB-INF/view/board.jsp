@@ -32,7 +32,7 @@
 					<td>${status.count}</td>
 					<td>${item.title}</td>
 					<td>${item.writer}</td>
-					<td>${item.dateTime}</td>
+					<td>${item.datetime}</td>
 					<td><button>삭제하기</button></td>
 				</tr>
 			</c:forEach>
