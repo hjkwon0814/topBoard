@@ -31,7 +31,7 @@
 	<script type="text/javascript">
 		function insert() {
 			
-			window.close();
+			
 			return true;
 		}
 		
@@ -39,13 +39,11 @@
 
 			var queryString = $("#writeBoard").serialize();
 			
-			let formData = {
+			const formData = {
 					writer : $("input[name=writer]").val(),
 					contents : $("textarea[name=contents]").val(),
 					title : $("input[name=title]").val()
 			}
-			
-			console.log(formData);
 			
 			$.ajax({
 				type : 'post',
@@ -55,12 +53,18 @@
 				dataType : "json",
 				success : function(json) {
 					alert(json);
+					window.opener.reloadDiv();
+					window.close();
 				},
 				error : function(xhr, status, error) {
-					alert(error);
+					console.log(error);
+					window.opener.reloadDiv();
+					window.close();
 				}
 				
 			});
+			
+			
 			
 		})
 	</script>

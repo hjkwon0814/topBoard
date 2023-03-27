@@ -5,7 +5,7 @@
 <mapper namespace="com.example.board.mapper.MapperInterface">
 
 	<select id="getBoardDto" resultType="BoardDTO">
-		SELECT id, title, contents, writer, dateTime FROM Board
+		SELECT id, title, contents, writer, dateTime FROM Board ORDER BY id DESC
 	</select>
 	
 	<insert id="setBoardDto">
