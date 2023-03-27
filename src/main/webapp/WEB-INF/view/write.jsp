@@ -45,21 +45,22 @@
 					title : $("input[name=title]").val()
 			}
 			
+			console.log(formData);
+			
 			$.ajax({
 				type : 'post',
 				url : '/boardWrite',
 				data : JSON.stringify(formData),
 				contentType: "application/json; charset=utf-8;",
 				dataType : "json",
-				success : function(json) {
-					alert(json);
+				success : function() {
 					window.opener.reloadDiv();
 					window.close();
 				},
 				error : function(xhr, status, error) {
-					console.log(error);
+					console.log(error);/* 
 					window.opener.reloadDiv();
-					window.close();
+					window.close(); */
 				}
 				
 			});
