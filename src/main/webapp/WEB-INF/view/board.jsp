@@ -16,7 +16,7 @@
 				<option value="writer">작성자</option>
 			</select> <input type="text">
 			<button>조회</button>
-			<button>선택삭제</button>
+			<button onclick="selectDelete()">선택삭제</button>
 		</div>
 		<div>
 			<table border="1" style="">
@@ -30,7 +30,7 @@
 				</tr>
 				<c:forEach var="item" items="${board}" varStatus="status">
 					<tr>
-						<td><input id="${status.count}" type="checkbox" name="check"></td>
+						<td><input id="${item.id}" type="checkbox" name="check"></td>
 						<td>${board.size()-status.count+1}</td>
 						<td>${item.title}</td>
 						<td>${item.writer}</td>
@@ -46,7 +46,7 @@
 				<option value="10">10</option>
 				<option value="20">20</option>
 			</select>
-			<button onClick="showPopup()">작성하기</button>
+			<button onclick="showPopup()">작성하기</button>
 		</div>
 	</div>
 	<script>
@@ -74,6 +74,39 @@
 				else $("#checkAll").prop("checked", true); 
 			});
 		})
+		
+		function selectDelete() {
+			var url = "boardDelete";
+			var boardIdList = new Array();
+			var list = $("input[name=check]");
+			for(var i = 0; i<list.length; i++) {
+				if(list[i].checked) {
+					boardIdList.push(list[i].id);
+					console.log(list[i].id);
+				}
+			}
+			
+			if(boardIdList.length == 0) {
+				alert("선택된 글이 없습니다.");
+			} else {
+				var alertDelete = confirm("정말 삭제 하시겠습니까?");
+				$.ajax({
+					url : url,
+					type : "POST",
+					data : {
+						boardIdList : boardIdList
+					},
+					success : function(data) {
+						if(data == 1) {
+							
+						}
+						else {
+							
+						}
+					}
+				})
+			}
+		}
 
 		/* $(function() {
 			$("#board").load(window.location.href + "board.jsp");
