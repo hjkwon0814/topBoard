@@ -39,21 +39,27 @@
 
 			var queryString = $("#writeBoard").serialize();
 			
-			console.log(queryString);
-			console.log(JSON.stringify(queryString));
+			let formData = {
+					writer : $("input[name=writer]").val(),
+					contents : $("textarea[name=contents]").val(),
+					title : $("input[name=title]").val()
+			}
+			
+			console.log(formData);
 			
 			$.ajax({
 				type : 'post',
 				url : '/boardWrite',
-				data : JSON.stringify(queryString),
-				contentType: 'application/json',
+				data : JSON.stringify(formData),
+				contentType: "application/json; charset=utf-8;",
 				dataType : "json",
-				error : function(xhr, status, error) {
-					alert("error");
-				},
 				success : function(json) {
 					alert(json);
+				},
+				error : function(xhr, status, error) {
+					alert(error);
 				}
+				
 			});
 			
 		})
