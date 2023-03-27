@@ -30,7 +30,7 @@
 				</tr>
 				<c:forEach var="item" items="${board}" varStatus="status">
 					<tr>
-						<td><input id="${status.count}" type="checkbox"></td>
+						<td><input id="${status.count}" type="checkbox" name="check"></td>
 						<td>${board.size()-status.count+1}</td>
 						<td>${item.title}</td>
 						<td>${item.writer}</td>
@@ -59,6 +59,21 @@
 		function reloadDiv() {
 			$('#board').load(location.href + '#board');
 		}
+		
+		$(function() {
+			$("#checkAll").click(function() {
+				if($("#checkAll").is(":checked")) $("input[name=check]").prop("checked", true);
+				else $("input[name=check]").prop("checked", false);
+			});
+			
+			$("input[name=check]").click(function() {
+				var total = $("input[name=check]").length;
+				var checked = $("input[name=check]:checked").length;
+
+				if(total != checked) $("#checkAll").prop("checked", false);
+				else $("#checkAll").prop("checked", true); 
+			});
+		})
 
 		/* $(function() {
 			$("#board").load(window.location.href + "board.jsp");
