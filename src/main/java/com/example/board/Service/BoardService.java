@@ -24,6 +24,6 @@ public class BoardService {
 		int retnum = mapperInterface.setBoardDto(boardDto);
 		
 		return retnum;
-	}
+	}	
 
 }

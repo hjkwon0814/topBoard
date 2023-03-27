@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -22,39 +22,41 @@
 		</div>
 	</form>
 
-	<div style="text-align: center; margin-top: 3px;">
-		<input type="button" value="등록하기" id="send" onclick="to_ajax();">
-	</div>
-	<script>
-		function fn_insert() {
+	<!-- <div style="text-align: center; margin-top: 3px;"> -->
+	<!-- <input type="button" value="등록하기" id="send" onclick="to_ajax();"> -->
+	<button id="send">등록하기</button>
+	<!-- </div> -->
+
+
+	<script type="text/javascript">
+		function insert() {
 			
-			
-			alert("되간함?");
-			/* window.close(); */
+			window.close();
 			return true;
 		}
 		
-		function sendData() {
-			alert("글 작성 되었습니다.");
-			document.getElementById("writeBoard").submit();
-		}
-		
-		function to_ajax() {
-			var queryString = $("writeBoard").serialize();
+		document.getElementById("send").addEventListener("click", function() {
+
+			var queryString = $("#writeBoard").serialize();
+			
+			console.log(queryString);
+			console.log(JSON.stringify(queryString));
 			
 			$.ajax({
 				type : 'post',
 				url : '/boardWrite',
-				data : queryString,
-				dataType = "json",
+				data : JSON.stringify(queryString),
+				contentType: 'application/json',
+				dataType : "json",
 				error : function(xhr, status, error) {
-					alert(error);
+					alert("error");
 				},
 				success : function(json) {
 					alert(json);
 				}
 			});
-		}
+			
+		})
 	</script>
 </body>
 </html>

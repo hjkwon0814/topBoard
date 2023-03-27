@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.board.DTO.BoardDTO;
+import com.example.board.DTO.BoardInsertDTO;
 import com.example.board.Service.BoardService;
 
 @Controller
@@ -33,9 +34,14 @@ public class BoardController {
 	}
 	
 	@PostMapping("/boardWrite")
-	public String boardWrite(Model model, BoardDTO boardDTO) {
+	public String boardWrite(Model model, @RequestBody BoardInsertDTO boardInsertDTO) {
 		
-		boardDTO.setDateTime(LocalDateTime.now().toString());
+		BoardDTO boardDTO = BoardDTO.builder()
+				.contents(boardInsertDTO.getContents())
+				.title(boardInsertDTO.getTitle())
+				.writer(boardInsertDTO.getWriter())
+				.dateTime(LocalDateTime.now().toString())
+				.build();
 		
 		boardService.insertBoard(boardDTO);
 		
@@ -44,7 +50,6 @@ public class BoardController {
 	
 	@GetMapping("/boardWritePopup")
 	public String writePopUP(Model model) {
-				
 		return "write";
 	}
 }
