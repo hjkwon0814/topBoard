@@ -45,8 +45,6 @@
 					title : $("input[name=title]").val()
 			}
 			
-			console.log(formData);
-			
 			$.ajax({
 				type : 'post',
 				url : '/boardWrite',
@@ -58,14 +56,12 @@
 					window.close();
 				},
 				error : function(xhr, status, error) {
-					console.log(error);/* 
+					console.log(error);
 					window.opener.reloadDiv();
-					window.close(); */
+					window.close();
 				}
 				
 			});
-			
-			
 			
 		})
 	</script>

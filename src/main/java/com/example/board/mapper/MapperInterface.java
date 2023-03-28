@@ -12,4 +12,6 @@ public interface MapperInterface {
 	List<BoardDTO> getBoardDto();
 	
 	int setBoardDto(BoardDTO boardDto);
+	
+	BoardDTO getDetailBoard(int id);
 }

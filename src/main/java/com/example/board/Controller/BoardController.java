@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,5 +52,15 @@ public class BoardController {
 	@GetMapping("/boardWritePopup")
 	public String writePopUP(Model model) {
 		return "write";
+	}
+	
+	@GetMapping("/boardDetail/{id}")
+	public String showDetail(Model model, @PathVariable int id) {
+		
+		BoardDTO boardDTO = boardService.getDetailBoard(id);
+		
+		model.addAttribute("detailBoard", boardDTO);
+		
+		return "detailPage";
 	}
 }

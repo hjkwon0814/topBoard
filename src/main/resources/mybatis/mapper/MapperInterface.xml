@@ -8,6 +8,10 @@
 		SELECT id, title, contents, writer, dateTime FROM Board ORDER BY id DESC
 	</select>
 	
+	<select id="getDetailBoard" resultType="BoardDTO" parameterType="Integer">
+		SELECT id, title, contents, writer, dateTime FROM Board where id = #{id}
+	</select>
+	
 	<insert id="setBoardDto">
 		INSERT INTO board (title, contents, writer, dateTime) values (#{title}, #{contents}, #{writer}, #{dateTime})
 	</insert>

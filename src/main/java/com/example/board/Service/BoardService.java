@@ -19,6 +19,10 @@ public class BoardService {
 		return mapperInterface.getBoardDto();
 	}
 	
+	public BoardDTO getDetailBoard(int id) {
+		return mapperInterface.getDetailBoard(id);
+	}
+	
 	public int insertBoard(BoardDTO boardDto) {
 		
 		int retnum = mapperInterface.setBoardDto(boardDto);

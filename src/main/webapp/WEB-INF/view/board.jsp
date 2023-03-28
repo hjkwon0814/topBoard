@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
+	<div id="board">
 		<div>
 			<select>
 				<option value="title">제목</option>
@@ -29,9 +29,9 @@
 					<td>비고</td>
 				</tr>
 				<c:forEach var="item" items="${board}" varStatus="status">
-					<tr>
+					<tr id="${item.id}" onclick="showPopup('boardDetail', ${item.id})">
 						<td><input id="${item.id}" type="checkbox" name="check"></td>
-						<td>${board.size()-status.count+1}</td>
+						<td>${board.size() - status.count + 1}</td>
 						<td>${item.title}</td>
 						<td>${item.writer}</td>
 						<td>${item.dateTime}</td>
@@ -46,20 +46,30 @@
 				<option value="10">10</option>
 				<option value="20">20</option>
 			</select>
-			<button onclick="showPopup()">작성하기</button>
+			<button onclick="showPopup('boardWritePopup')">작성하기</button>
 		</div>
 	</div>
-	<script>
-		const openURL = '/boardWritePopup'
-		function showPopup() {
-			var windowOpen = window.open(openURL, "팝업 테스트",
-					"width=400, height=300, top=10, left=10");
+	<script>		
+		// 팝업 창 띄우기
+		function showPopup(openURL, id) {
+			console.log(openURL);
+			if(arguments.length == 2) {
+				var windowOpen = window.open(openURL + "/" + id, "팝업 테스트",
+				"width=400, height=300, top=10, left=10");
+			}else {
+				var windowOpen = window.open(openURL, "팝업 테스트",
+				"width=400, height=300, top=10, left=10");	
+			}
+			
 		}
 
+		// 부분 렌더링
 		function reloadDiv() {
 			$('#board').load(location.href + '#board');
 		}
 		
+		
+		// 체크
 		$(function() {
 			$("#checkAll").click(function() {
 				if($("#checkAll").is(":checked")) $("input[name=check]").prop("checked", true);
@@ -75,6 +85,7 @@
 			});
 		})
 		
+		// 선택 삭제
 		function selectDelete() {
 			var url = "boardDelete";
 			var boardIdList = new Array();
@@ -82,7 +93,6 @@
 			for(var i = 0; i<list.length; i++) {
 				if(list[i].checked) {
 					boardIdList.push(list[i].id);
-					console.log(list[i].id);
 				}
 			}
 			
@@ -97,12 +107,7 @@
 						boardIdList : boardIdList
 					},
 					success : function(data) {
-						if(data == 1) {
-							
-						}
-						else {
-							
-						}
+						
 					}
 				})
 			}
