@@ -1,5 +1,6 @@
 package com.example.board.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,20 @@ public class BoardService {
 	public int insertBoard(BoardDTO boardDto) {
 		
 		int retnum = mapperInterface.setBoardDto(boardDto);
+		
+		return retnum;
+	}
+
+	public int deleteBoard(int id) {
+		
+		int retnum = mapperInterface.deleteBoard(id);
+		
+		return retnum;
+	}
+
+	public int deleteBoardSelect(ArrayList<Integer> idList) {
+		
+		int retnum = mapperInterface.deleteBoardSelect(idList);
 		
 		return retnum;
 	}	

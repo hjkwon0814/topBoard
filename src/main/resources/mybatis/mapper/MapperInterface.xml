@@ -5,15 +5,34 @@
 <mapper namespace="com.example.board.mapper.MapperInterface">
 
 	<select id="getBoardDto" resultType="BoardDTO">
-		SELECT id, title, contents, writer, dateTime FROM Board ORDER BY id DESC
+		SELECT id, title, contents,
+		writer, dateTime FROM Board where flag = 0 ORDER BY id DESC
 	</select>
-	
-	<select id="getDetailBoard" resultType="BoardDTO" parameterType="Integer">
-		SELECT id, title, contents, writer, dateTime FROM Board where id = #{id}
+
+	<select id="getDetailBoard" resultType="BoardDTO"
+		parameterType="Integer">
+		SELECT id, title, contents, writer, dateTime FROM Board
+		where id = #{id} AND flag = 0
 	</select>
-	
+
 	<insert id="setBoardDto">
-		INSERT INTO board (title, contents, writer, dateTime) values (#{title}, #{contents}, #{writer}, #{dateTime})
+		INSERT INTO board (title, contents, writer, dateTime)
+		values (#{title}, #{contents}, #{writer}, #{dateTime})
 	</insert>
+
+	<update id="deleteBoard">
+		UPDATE BOARD set
+		flag = 1
+		where id = #{id}
+	</update>
+
+	<update id="deleteBoardSelect">
+			UPDATE BOARD set
+			flag = 1
+			where id IN
+		<foreach item="boardId" index="index" collection="list" open="(" separator="," close=")">			
+			#{boardId}
+		</foreach>
+	</update>
 
 </mapper>

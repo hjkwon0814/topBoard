@@ -1,6 +1,7 @@
 package com.example.board.Controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.board.DTO.BoardDTO;
+import com.example.board.DTO.BoardIdListDTO;
 import com.example.board.DTO.BoardInsertDTO;
 import com.example.board.Service.BoardService;
 
@@ -62,5 +64,21 @@ public class BoardController {
 		model.addAttribute("detailBoard", boardDTO);
 		
 		return "detailPage";
+	}
+	
+	@PostMapping("/deleteBoard/{id}")
+	public String deleteBoard(Model model, @PathVariable int id) {
+		
+		boardService.deleteBoard(id);		
+		
+		return "board";
+	}
+	
+	@PostMapping("/selectDeleteBoard")
+	public String selectDeleteBoard(Model model, @RequestParam(value="IdList[]") ArrayList<Integer> idList) {
+		
+		boardService.deleteBoardSelect(idList);
+		
+		return "board";
 	}
 }

@@ -1,5 +1,6 @@
 package com.example.board.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -14,4 +15,8 @@ public interface MapperInterface {
 	int setBoardDto(BoardDTO boardDto);
 	
 	BoardDTO getDetailBoard(int id);
+
+	int deleteBoard(int id);
+
+	int deleteBoardSelect(ArrayList<Integer> idList);
 }

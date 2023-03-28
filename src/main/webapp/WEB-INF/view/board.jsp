@@ -29,13 +29,13 @@
 					<td>비고</td>
 				</tr>
 				<c:forEach var="item" items="${board}" varStatus="status">
-					<tr id="${item.id}" onclick="showPopup('boardDetail', ${item.id})">
+					<tr id="${item.id}">
 						<td><input id="${item.id}" type="checkbox" name="check"></td>
 						<td>${board.size() - status.count + 1}</td>
-						<td>${item.title}</td>
+						<td onclick="showPopup('boardDetail', ${item.id})">${item.title}</td>
 						<td>${item.writer}</td>
 						<td>${item.dateTime}</td>
-						<td><button>삭제하기</button></td>
+						<td><button onclick="deleteOne(${item.id})">삭제하기</button></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -85,15 +85,43 @@
 			});
 		})
 		
+		//일반 삭제
+		
+		function deleteOne(id) {
+			event.stopPropagation();
+			
+			if(confirm("정말 삭제하시겠습니까?")) {
+				$.ajax({
+					type : 'post',
+					url : '/deleteBoard/' + id,
+					contentType: "application/json; charset=utf-8;",
+					success : function() {
+						alert("삭제 성공");
+						reloadDiv();
+					},
+					error : function(xhr, status, error) {
+						alert("삭제 실패");
+					}
+					
+				});
+			}else {				
+				alert("취소");
+			}
+		}
+		
 		// 선택 삭제
 		function selectDelete() {
-			var url = "boardDelete";
+			var url = "selectDeleteBoard";
 			var boardIdList = new Array();
 			var list = $("input[name=check]");
 			for(var i = 0; i<list.length; i++) {
 				if(list[i].checked) {
 					boardIdList.push(list[i].id);
 				}
+			}
+			
+			const listData = {
+				IdList : boardIdList
 			}
 			
 			if(boardIdList.length == 0) {
@@ -103,11 +131,13 @@
 				$.ajax({
 					url : url,
 					type : "POST",
-					data : {
-						boardIdList : boardIdList
-					},
+					data : listData,
 					success : function(data) {
-						
+						alert("삭제 성공");
+						reloadDiv();
+					},
+					error : function(xhr, status, error) {
+						alert("삭제 실패");
 					}
 				})
 			}

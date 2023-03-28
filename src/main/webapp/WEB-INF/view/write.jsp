@@ -29,11 +29,6 @@
 
 
 	<script type="text/javascript">
-		function insert() {
-			
-			
-			return true;
-		}
 		
 		document.getElementById("send").addEventListener("click", function() {
 
@@ -50,14 +45,13 @@
 				url : '/boardWrite',
 				data : JSON.stringify(formData),
 				contentType: "application/json; charset=utf-8;",
-				dataType : "json",
 				success : function() {
+					alert("등록 성공");
 					window.opener.reloadDiv();
 					window.close();
 				},
 				error : function(xhr, status, error) {
-					console.log(error);
-					window.opener.reloadDiv();
+					alert("등록 실패");
 					window.close();
 				}
 				
