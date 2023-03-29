@@ -52,15 +52,13 @@
 	<script>		
 		// 팝업 창 띄우기
 		function showPopup(openURL, id) {
-			console.log(openURL);
 			if(arguments.length == 2) {
 				var windowOpen = window.open(openURL + "/" + id, "팝업 테스트",
 				"width=400, height=300, top=10, left=10");
 			}else {
 				var windowOpen = window.open(openURL, "팝업 테스트",
 				"width=400, height=300, top=10, left=10");	
-			}
-			
+			}			
 		}
 
 		// 부분 렌더링
@@ -88,7 +86,6 @@
 		//일반 삭제
 		
 		function deleteOne(id) {
-			event.stopPropagation();
 			
 			if(confirm("정말 삭제하시겠습니까?")) {
 				$.ajax({
@@ -104,7 +101,7 @@
 					}
 					
 				});
-			}else {				
+			} else {
 				alert("취소");
 			}
 		}
@@ -142,10 +139,6 @@
 				})
 			}
 		}
-
-		/* $(function() {
-			$("#board").load(window.location.href + "board.jsp");
-		}) */
 	</script>
 </body>
 </html>

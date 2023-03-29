@@ -19,7 +19,9 @@
 		</div>
 		<div>
 			<span>작성자 : </span><input name="writer" type="text">
+			<input name="savename" type="checkBox"><span>작성자 저장</span>
 		</div>
+		
 	</form>
 
 	<!-- <div style="text-align: center; margin-top: 3px;"> -->
@@ -29,16 +31,23 @@
 
 
 	<script type="text/javascript">
+	
+		$('input[name=writer]').attr('value', window.localStorage.getItem("writer"));
+		/* $('input[name=savename]').attr('checked', window.localStorage.getItem("checkBoxBool")); */
+		$('input[name=savename]').attr('checked', window.localStorage.getItem("checkBoxBool") === "true");
+		console.log(window.localStorage.getItem("checkBoxBool") == "false");
 		
 		document.getElementById("send").addEventListener("click", function() {
 
 			var queryString = $("#writeBoard").serialize();
+			var checkBox = $('input[name=savename]');
 			
 			const formData = {
 					writer : $("input[name=writer]").val(),
 					contents : $("textarea[name=contents]").val(),
 					title : $("input[name=title]").val()
 			}
+			
 			
 			$.ajax({
 				type : 'post',
@@ -47,6 +56,14 @@
 				contentType: "application/json; charset=utf-8;",
 				success : function() {
 					alert("등록 성공");
+					if(checkBox.prop("checked")) {
+						window.localStorage.setItem("writer",formData.writer);
+						window.localStorage.setItem("checkBoxBool","true");
+					}else {
+						window.localStorage.setItem("writer","");
+						window.localStorage.setItem("checkBoxBool","false");
+					}
+					
 					window.opener.reloadDiv();
 					window.close();
 				},

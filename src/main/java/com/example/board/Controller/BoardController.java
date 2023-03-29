@@ -69,7 +69,7 @@ public class BoardController {
 	@PostMapping("/deleteBoard/{id}")
 	public String deleteBoard(Model model, @PathVariable int id) {
 		
-		boardService.deleteBoard(id);		
+		boardService.deleteBoard(id);
 		
 		return "board";
 	}
