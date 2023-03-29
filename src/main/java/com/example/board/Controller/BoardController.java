@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.board.DTO.BoardDTO;
-import com.example.board.DTO.BoardIdListDTO;
 import com.example.board.DTO.BoardInsertDTO;
+import com.example.board.DTO.ComCode;
 import com.example.board.Service.BoardService;
 
 @Controller
@@ -30,8 +30,12 @@ public class BoardController {
 	@GetMapping
 	public String home(Model model) {
 		List<BoardDTO> boards = boardService.getBoardDto();
-				
-		model.addAttribute("board", boards);		
+		List<ComCode> com = boardService.getComCode();
+		
+		model.addAttribute("comCode", com);
+		model.addAttribute("board", boards);
+		
+		System.out.println(com);
 		
 		return "board";
 	}
@@ -48,11 +52,12 @@ public class BoardController {
 		
 		boardService.insertBoard(boardDTO);
 		
-		return "board";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/boardWritePopup")
 	public String writePopUP(Model model) {
+		
 		return "write";
 	}
 	
@@ -71,7 +76,7 @@ public class BoardController {
 		
 		boardService.deleteBoard(id);
 		
-		return "board";
+		return "redirect:/";
 	}
 	
 	@PostMapping("/selectDeleteBoard")
@@ -79,6 +84,6 @@ public class BoardController {
 		
 		boardService.deleteBoardSelect(idList);
 		
-		return "board";
+		return "redirect:/";
 	}
 }

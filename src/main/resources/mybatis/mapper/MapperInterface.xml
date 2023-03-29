@@ -34,5 +34,9 @@
 			#{boardId}
 		</foreach>
 	</update>
+	
+	<select id="getComCode" resultType="ComCode">
+		SELECT c.COM_GRP_CD, c.COM_GRP_DESC, d.COM_CODE, d.COM_CODE_DESC FROM com_code_dtl d, com_grp_code c where c.COM_GRP_CD = d.COM_GRP_CD;
+	</select>
 
 </mapper>

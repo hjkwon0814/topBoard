@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -48,7 +50,22 @@
 			</select>
 			<button onclick="showPopup('boardWritePopup')">작성하기</button>
 		</div>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Previous"><span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<c:forEach var="item" items="${board}" varStatus="status">
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+				</c:forEach>
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
+			</ul>
+		</nav>
 	</div>
+
+
 	<script>		
 		// 팝업 창 띄우기
 		function showPopup(openURL, id) {

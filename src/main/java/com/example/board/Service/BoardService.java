@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.board.DTO.BoardDTO;
+import com.example.board.DTO.ComCode;
 import com.example.board.mapper.MapperInterface;
 
 
@@ -43,6 +44,10 @@ public class BoardService {
 		int retnum = mapperInterface.deleteBoardSelect(idList);
 		
 		return retnum;
+	}
+
+	public List<ComCode> getComCode() {
+		return mapperInterface.getComCode();
 	}	
 
 }
