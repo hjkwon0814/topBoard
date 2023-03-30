@@ -27,13 +27,17 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;	
 	
-	@GetMapping
-	public String home(Model model) {
+	@GetMapping(value = {"{page}/{pageCount}","/"})
+	public String home(Model model, @PathVariable(required = false) String page, @PathVariable(required = false) String pageCount) {
 		List<BoardDTO> boards = boardService.getBoardDto();
 		List<ComCode> com = boardService.getComCode();
+		String tempPage = (page == null) ? "1" : page;
+		String tempCount = (pageCount == null) ? "5" : pageCount;
 		
 		model.addAttribute("comCode", com);
 		model.addAttribute("board", boards);
+		model.addAttribute("page", tempPage);
+		model.addAttribute("pageCount", tempCount);
 		
 		System.out.println(com);
 		

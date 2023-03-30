@@ -30,10 +30,10 @@
 					<td>작성일시(YYYY-MM-DD HH24.MI.SS)</td>
 					<td>비고</td>
 				</tr>
-				<c:forEach var="item" items="${board}" varStatus="status">
+				<c:forEach begin="5" end="9" var="item" items="${board}" varStatus="status">
 					<tr id="${item.id}">
 						<td><input id="${item.id}" type="checkbox" name="check"></td>
-						<td>${board.size() - status.count + 1}</td>
+						<td>${board.size()-5 - status.count + 1}</td>
 						<td onclick="showPopup('boardDetail', ${item.id})">${item.title}</td>
 						<td>${item.writer}</td>
 						<td>${item.dateTime}</td>
@@ -55,8 +55,8 @@
 				<li class="page-item"><a class="page-link" href="#"
 					aria-label="Previous"><span aria-hidden="true">&laquo;</span>
 				</a></li>
-				<c:forEach var="item" items="${board}" varStatus="status">
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<c:forEach begin="0" end="${board.size()/5}" varStatus="status">
+					<li class="page-item" value="${status.count}"><a class="page-link">${status.count}</a></li>
 				</c:forEach>
 				<li class="page-item"><a class="page-link" href="#"
 					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
