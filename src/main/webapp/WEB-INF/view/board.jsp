@@ -52,7 +52,8 @@
 		</div>
 		<nav aria-label="Page navigation example">
 			<ul class="pagination">
-				<c:forEach begin="0" end="${board.size()/pageCount}" varStatus="status">
+				<c:set var="pageC" value="${board.size()%pageCount eq 0 ? (board.size()/pageCount) -1 : board.size()/pageCount}"></c:set>
+				<c:forEach begin="0" end="${pageC}" varStatus="status">
 					<li class="page-item" value="${status.count}"><a class="page-link">${status.count}</a></li>
 				</c:forEach>				
 			</ul>
