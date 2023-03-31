@@ -34,12 +34,13 @@ public class BoardController {
 		String tempPage = (page == null) ? "1" : page;
 		String tempCount = (pageCount == null) ? "5" : pageCount;
 		
+		System.out.println(tempPage);
+		System.out.println(tempCount);
+		
 		model.addAttribute("comCode", com);
 		model.addAttribute("board", boards);
 		model.addAttribute("page", tempPage);
 		model.addAttribute("pageCount", tempCount);
-		
-		System.out.println(com);
 		
 		return "board";
 	}

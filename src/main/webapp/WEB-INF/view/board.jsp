@@ -30,10 +30,10 @@
 					<td>작성일시(YYYY-MM-DD HH24.MI.SS)</td>
 					<td>비고</td>
 				</tr>
-				<c:forEach begin="5" end="9" var="item" items="${board}" varStatus="status">
+				<c:forEach begin="${(page-1) * pageCount}" end="${(pageCount - 1) + ((page - 1) * pageCount)}" var="item" items="${board}" varStatus="status">
 					<tr id="${item.id}">
 						<td><input id="${item.id}" type="checkbox" name="check"></td>
-						<td>${board.size()-5 - status.count + 1}</td>
+						<td>${board.size() + 1 - status.count - ((page -1) * pageCount)}</td>
 						<td onclick="showPopup('boardDetail', ${item.id})">${item.title}</td>
 						<td>${item.writer}</td>
 						<td>${item.dateTime}</td>
@@ -43,7 +43,7 @@
 			</table>
 		</div>
 		<div>
-			<select>
+			<select id="pageCount" onChange="CountPaging()">
 				<option value="5">5</option>
 				<option value="10">10</option>
 				<option value="20">20</option>
@@ -52,21 +52,36 @@
 		</div>
 		<nav aria-label="Page navigation example">
 			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"><span aria-hidden="true">&laquo;</span>
-				</a></li>
-				<c:forEach begin="0" end="${board.size()/5}" varStatus="status">
+				<c:forEach begin="0" end="${board.size()/pageCount}" varStatus="status">
 					<li class="page-item" value="${status.count}"><a class="page-link">${status.count}</a></li>
-				</c:forEach>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
+				</c:forEach>				
 			</ul>
 		</nav>
 	</div>
 
 
-	<script>		
+	<script>
+	
+		$('.pagination li').on('click', function(e) {
+			var pageCount = $("#pageCount option:selected").val();
+			var page = $(this).val();
+			$.ajax({
+				type : 'get',
+				url : "/" + page + "/" + pageCount,
+				success : function() {
+					$('#board').load("/" + page + "/" + pageCount + '#board');
+					$("#pageCount").val(pageCount).prop("selected", true);
+				},
+				error : function(xhr, status, error) {
+					alert("실패");
+				}
+				
+			});
+		})
+	
+		// select option value 선택
+		$("#pageCount").val(${pageCount}).prop("selected", true);
+		
 		// 팝업 창 띄우기
 		function showPopup(openURL, id) {
 			if(arguments.length == 2) {
@@ -155,6 +170,32 @@
 					}
 				})
 			}
+		}
+		
+		function CountPaging() {
+			var pageCount = $("#pageCount option:selected").val();
+			var page = ${page};
+			
+			$('#board').load("/" + page + "/" + pageCount + '#board');
+		}
+		
+		function paging() {
+			var pageCount = $("#pageCount option:selected").val();
+			var page = ${page};
+			console.log(pageCount);
+			console.log(page);
+			$.ajax({
+				type : 'get',
+				url : "/" + page + "/" + pageCount,
+				success : function() {
+					$('#board').load("/" + page + "/" + pageCount + '#board');
+					$("#pageCount").val(pageCount).prop("selected", true);
+				},
+				error : function(xhr, status, error) {
+					alert("실패");
+				}
+				
+			});
 		}
 	</script>
 </body>
